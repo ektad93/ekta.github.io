@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ekta Abhishek Desai | Portfolio</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f9f9f7; --surface: #ffffff; --surface2: #f3f2ee;
+      --border: rgba(0,0,0,0.1); --text: #1a1a18; --muted: #5f5e5a; --hint: #888780;
+      --accent: #185FA5; --accent-bg: #E6F1FB; --accent-text: #0C447C;
+      --green-bg: #EAF3DE; --green-text: #3B6D11;
+      --amber-bg: #FAEEDA; --amber-text: #854F0B;
+      --red-bg: #FCEBEB; --red-text: #A32D2D;
+      --teal-bg: #E1F5EE; --teal-text: #0F6E56;
+      --purple-bg: #EEEDFE; --purple-text: #3C3489;
+      --radius-md: 8px; --radius-lg: 12px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a; --surface: #26261f; --surface2: #2c2c2a;
+        --border: rgba(255,255,255,0.1); --text: #f0eeea; --muted: #b4b2a9; --hint: #888780;
+        --accent: #378ADD; --accent-bg: #042C53; --accent-text: #B5D4F4;
+        --green-bg: #173404; --green-text: #C0DD97;
+        --amber-bg: #412402; --amber-text: #FAC775;
+        --red-bg: #501313; --red-text: #F7C1C1;
+        --teal-bg: #04342C; --teal-text: #9FE1CB;
+        --purple-bg: #26215C; --purple-text: #CECBF6;
+      }
+    }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--surface); border-bottom: 0.5px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+    nav .brand { font-weight: 500; font-size: 15px; }
+    nav ul { list-style: none; display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { text-decoration: none; font-size: 13px; color: var(--muted); transition: color 0.2s; }
+    nav a:hover { color: var(--text); }
+    .container { max-width: 920px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    /* Hero */
+    .hero { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 2rem 2.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; gap: 2rem; }
+    .avatar { width: 82px; height: 82px; border-radius: 50%; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 500; color: var(--accent-text); flex-shrink: 0; border: 2px solid var(--accent); }
+    .hero-info h1 { font-size: 24px; font-weight: 500; margin-bottom: 3px; }
+    .hero-info .subtitle { color: var(--muted); font-size: 14px; margin-bottom: 12px; }
+    .contact-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    .chip { font-size: 12px; padding: 4px 11px; border-radius: var(--radius-md); background: var(--surface2); border: 0.5px solid var(--border); color: var(--muted); }
+    .chip a { color: var(--accent); text-decoration: none; }
+    .chip a:hover { text-decoration: underline; }
+    .btn-linkedin { display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border-radius: var(--radius-md); background: #0A66C2; color: #fff; font-size: 13px; font-weight: 500; text-decoration: none; transition: background 0.2s; }
+    .btn-linkedin:hover { background: #0858a8; }
+    .btn-linkedin svg { width: 15px; height: 15px; fill: #fff; flex-shrink: 0; }
+
+    /* Section */
+    .section { margin-bottom: 2.5rem; }
+    .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hint); margin-bottom: 12px; }
+
+    /* Skills */
+    .skills-outer { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; }
+    .cat-label { font-size: 12px; color: var(--muted); margin-bottom: 7px; margin-top: 13px; }
+    .cat-label:first-child { margin-top: 0; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 12px; padding: 3px 9px; border-radius: var(--radius-md); }
+    .tag.blue   { background: var(--accent-bg);  color: var(--accent-text);  border: 0.5px solid rgba(24,95,165,0.2); }
+    .tag.green  { background: var(--green-bg);   color: var(--green-text);   border: 0.5px solid rgba(59,109,17,0.2); }
+    .tag.amber  { background: var(--amber-bg);   color: var(--amber-text);   border: 0.5px solid rgba(133,79,11,0.2); }
+    .tag.red    { background: var(--red-bg);     color: var(--red-text);     border: 0.5px solid rgba(163,45,45,0.2); }
+    .tag.teal   { background: var(--teal-bg);    color: var(--teal-text);    border: 0.5px solid rgba(15,110,86,0.2); }
+    .tag.purple { background: var(--purple-bg);  color: var(--purple-text);  border: 0.5px solid rgba(60,52,137,0.2); }
+
+    /* Experience */
+    .job { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem 1.5rem; margin-bottom: 10px; }
+    .job-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; margin-bottom: 8px; }
+    .job-title { font-size: 15px; font-weight: 500; }
+    .job-co { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .job-date { font-size: 12px; color: var(--hint); white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+    .job ul { padding-left: 1.2rem; margin-top: 4px; }
+    .job li { font-size: 13px; color: var(--muted); line-height: 1.65; margin-bottom: 4px; }
+    .job li strong { color: var(--text); font-weight: 500; }
+
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .proj-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.25rem; display: flex; flex-direction: column; }
+    .proj-card.featured { border: 2px solid var(--accent); }
+    .proj-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 6px; }
+    .proj-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--radius-md); margin-bottom: 8px; }
+    .proj-badge.teal   { background: var(--teal-bg);   color: var(--teal-text);   border: 0.5px solid rgba(15,110,86,0.2); }
+    .proj-badge.blue   { background: var(--accent-bg); color: var(--accent-text); border: 0.5px solid rgba(24,95,165,0.2); }
+    .proj-badge.green  { background: var(--green-bg);  color: var(--green-text);  border: 0.5px solid rgba(59,109,17,0.2); }
+    .proj-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+    .proj-card .proj-org { font-size: 12px; color: var(--hint); margin-bottom: 8px; }
+    .proj-card p { font-size: 13px; color: var(--muted); line-height: 1.6; flex: 1; }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+    .proj-footer { margin-top: 14px; padding-top: 12px; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+    .proj-link { font-size: 12px; color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .proj-link:hover { text-decoration: underline; }
+    .proj-link svg { width: 12px; height: 12px; }
+    .live-badge { font-size: 11px; padding: 2px 8px; border-radius: var(--radius-md); background: var(--green-bg); color: var(--green-text); border: 0.5px solid rgba(59,109,17,0.2); }
+
+    /* Health metrics highlight card */
+    .hm-highlights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+    .hm-stat { background: var(--surface2); border-radius: var(--radius-md); padding: 8px 10px; text-align: center; }
+    .hm-stat .hm-val { font-size: 16px; font-weight: 500; color: var(--text); }
+    .hm-stat .hm-lbl { font-size: 11px; color: var(--hint); margin-top: 1px; }
+
+    /* Certs */
+    .cert-row { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cert-card { flex: 1; min-width: 200px; background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; display: flex; align-items: center; gap: 12px; }
+    .cert-icon { width: 36px; height: 36px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* Bottom */
+    .bottom-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .edu-item { margin-bottom: 14px; padding-bottom: 14px; border-bottom: 0.5px solid var(--border); }
+    .edu-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .edu-item h3 { font-size: 14px; font-weight: 500; }
+    .edu-item .deg { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .edu-item .meta { font-size: 12px; color: var(--hint); margin-top: 2px; }
+    .gpa-badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: var(--radius-md); background: var(--green-bg); color: var(--green-text); border: 0.5px solid rgba(59,109,17,0.2); margin-left: 6px; }
+    .achieve { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 12px; }
+    .achieve:last-child { margin-bottom: 0; }
+    .medal { width: 30px; height: 30px; border-radius: 50%; background: var(--amber-bg); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; color: var(--amber-text); border: 0.5px solid rgba(133,79,11,0.2); font-weight: 500; }
+    .achieve p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .achieve strong { color: var(--text); font-weight: 500; }
+
+    footer { text-align: center; font-size: 12px; color: var(--hint); padding: 2rem 0 1rem; border-top: 0.5px solid var(--border); margin-top: 2rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .hero { flex-direction: column; }
+      .skills-outer, .projects-grid, .bottom-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 12px; }
+      .hm-highlights { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">Ekta Desai</div>
+  <ul>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+  </ul>
+</nav>
+
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="avatar">ED</div>
+    <div class="hero-info">
+      <h1>Ekta Abhishek Desai</h1>
+      <p class="subtitle">Software Engineer &nbsp;&middot;&nbsp; Full-Stack &amp; Data Analytics &nbsp;&middot;&nbsp; Dallas, TX</p>
+      <div class="contact-row">
+        <span class="chip">(945) 217-2086</span>
+        <span class="chip"><a href="mailto:ektadeshpande93@gmail.com">ektadeshpande93@gmail.com</a></span>
+        <span class="chip"><a href="mailto:exd210009@utdallas.edu">exd210009@utdallas.edu</a></span>
+        <span class="chip">115 Monarch Way, Wylie, TX 75098</span>
+      </div>
+      <a class="btn-linkedin" href="https://www.linkedin.com/in/ekta-abhishek-desai-3813a869/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        View LinkedIn Profile
+      </a>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section" id="skills">
+    <div class="section-label">Technical Skills</div>
+    <div class="skills-outer">
+      <div class="card">
+        <div class="cat-label">Programming</div>
+        <div class="tags">
+          <span class="tag green">C#</span><span class="tag green">Python</span><span class="tag green">R</span>
+          <span class="tag green">Java</span><span class="tag green">C / C++</span><span class="tag green">VB.NET</span>
+        </div>
+        <div class="cat-label">Scripting &amp; Frontend</div>
+        <div class="tags">
+          <span class="tag blue">HTML</span><span class="tag blue">JavaScript</span>
+          <span class="tag blue">jQuery</span><span class="tag blue">React JS</span><span class="tag blue">Angular JS</span>
+        </div>
+        <div class="cat-label">Databases</div>
+        <div class="tags">
+          <span class="tag red">MS SQL Server</span><span class="tag red">MySQL</span><span class="tag red">PL/SQL</span>
+        </div>
+        <div class="cat-label">Technologies &amp; Frameworks</div>
+        <div class="tags">
+          <span class="tag amber">.NET Core</span><span class="tag amber">ASP.NET</span>
+          <span class="tag amber">ASP.NET MVC</span><span class="tag amber">Entity Framework</span>
+          <span class="tag amber">LINQ</span><span class="tag amber">SAP BW</span>
+          <span class="tag amber">Big Data</span><span class="tag amber">GIT</span><span class="tag amber">TFS</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="cat-label">Reporting &amp; AI Tools</div>
+        <div class="tags">
+          <span class="tag teal">Tableau</span><span class="tag teal">Crystal Reports</span>
+          <span class="tag teal">SSRS</span><span class="tag teal">GitHub Copilot</span>
+          <span class="tag teal">Figma</span><span class="tag teal">UI/UX</span><span class="tag teal">ApexCharts</span>
+        </div>
+        <div class="cat-label">Certifications</div>
+        <div class="tags">
+          <span class="tag purple">PG Diploma – IT Projects Mgmt</span>
+          <span class="tag purple">AWS Cloud Practitioner</span>
+        </div>
+        <div class="cat-label">Soft Skills &amp; Methods</div>
+        <div class="tags">
+          <span class="tag green">Agile &amp; Scrum</span>
+          <span class="tag green">Team Leadership</span>
+          <span class="tag green">Azure CI/CD</span>
+          <span class="tag green">Dynatrace</span>
+          <span class="tag green">Flask</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section" id="experience">
+    <div class="section-label">Professional Experience</div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Software Engineer – Associate</div>
+          <div class="job-co">Experian &nbsp;&middot;&nbsp; Dallas, TX, USA</div>
+        </div>
+        <div class="job-date">Apr 2025 – Apr 2026</div>
+      </div>
+      <ul>
+        <li>Built multiple full-stack application features using C#, .NET, Entity Framework, React.js, and SQL Server.</li>
+        <li>Identified and resolved production issues using Dynatrace, contributing to improved application stability.</li>
+        <li>Supported production deployments and post-release validation using Azure CI/CD Pipelines.</li>
+        <li>Used AI tools like GitHub Copilot to accelerate development and improve code quality and consistency.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Software Engineer – Xcelerator Rotation Program</div>
+          <div class="job-co">Experian &nbsp;&middot;&nbsp; Dallas, TX, USA</div>
+        </div>
+        <div class="job-date">Apr 2023 – Apr 2024</div>
+      </div>
+      <ul>
+        <li>Enhanced the WOTC Application for the Experian Employer Services team to streamline customer data uploads via the Excel Batch Uploader, leveraging .NET, Entity Framework, C#, and Microsoft SQL Server.</li>
+        <li>Collaborated effectively in an Agile environment with a team of 7 Developers, QAs, and POs.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Software Engineer Intern</div>
+          <div class="job-co">Experian &nbsp;&middot;&nbsp; Dallas, TX, USA</div>
+        </div>
+        <div class="job-date">May 2023 – Dec 2023</div>
+      </div>
+      <ul>
+        <li>Developed a new application for Experian Marketing Services to facilitate customer data upload via Excel Batch Uploader using .NET Core, Python, Entity Framework, C#, and Microsoft SQL Server.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">UI/UX Designer &amp; Developer</div>
+          <div class="job-co">Alpha Genesis Labs &nbsp;&middot;&nbsp; Dallas, TX, USA</div>
+        </div>
+        <div class="job-date">Jan 2023 – Mar 2023</div>
+      </div>
+      <ul>
+        <li>Designed product UI/UX prototypes using Figma, focusing on improving usability and overall customer experience.</li>
+        <li>Developed a health-focused application using Python and HTML.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Senior Software Engineer</div>
+          <div class="job-co">IBM &nbsp;&middot;&nbsp; Mumbai, India</div>
+        </div>
+        <div class="job-date">Sep 2018 – Dec 2021</div>
+      </div>
+      <ul>
+        <li>Designed and developed multiple .NET applications for National Grid Entities in the US.</li>
+        <li>Successfully migrated 3 PL/SQL applications from old legacy servers to new servers.</li>
+        <li>Implemented disaster recovery processes and production support for Reserve Bank of India systems.</li>
+        <li>Enhanced Insurance Portal and Sales Management System using ASP.NET MVC and Microsoft SQL Server.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Software Engineer</div>
+          <div class="job-co">Intelenet Global Services &nbsp;&middot;&nbsp; Mumbai, India</div>
+        </div>
+        <div class="job-date">Jul 2016 – Aug 2018</div>
+      </div>
+      <ul>
+        <li>Developed CRM automation solutions using ASP.NET MVC, C#, and SQL Server.</li>
+        <li>Delivered solutions for clients including SBI, Dena Bank, Castrol, and National Railway Enquiries.</li>
+        <li>Led a team of 5 developers to deliver IAM (Audit Management System) in a time crunch project.</li>
+      </ul>
+    </div>
+
+    <div class="job">
+      <div class="job-header">
+        <div>
+          <div class="job-title">Trainee Software Engineer</div>
+          <div class="job-co">LogStar ERP India Pvt Ltd &nbsp;&middot;&nbsp; Mumbai, India</div>
+        </div>
+        <div class="job-date">Jan 2015 – Jun 2016</div>
+      </div>
+      <ul>
+        <li>Developed features for logistics platforms Depot Plus and GCTOS (General Cargo Terminal Operating System) using ASP.NET MVC, C#, and SQL Server.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section" id="projects">
+    <div class="section-label">Projects</div>
+    <div class="projects-grid">
+
+      <!-- HealthMetrics – featured -->
+      <div class="proj-card featured">
+        <div class="proj-badge green">Personal Project</div>
+        <div class="proj-top">
+          <h3>HealthMetrics Dashboard</h3>
+        </div>
+        <div class="proj-org">Full-Stack Data Visualization App &nbsp;&middot;&nbsp; GitHub</div>
+        <p>An interactive health data visualization platform that renders bar graphs, trend lines, and analytical charts to make personal health metrics easy to understand. Built with a Python/Flask REST API backend and a JavaScript frontend powered by ApexCharts and Bootstrap — served via XAMPP on separate ports for clean separation of concerns.</p>
+
+        <div class="hm-highlights">
+          <div class="hm-stat">
+            <div class="hm-val">Python</div>
+            <div class="hm-lbl">Backend API</div>
+          </div>
+          <div class="hm-stat">
+            <div class="hm-val">Flask</div>
+            <div class="hm-lbl">REST Framework</div>
+          </div>
+          <div class="hm-stat">
+            <div class="hm-val">ApexCharts</div>
+            <div class="hm-lbl">Visualization</div>
+          </div>
+        </div>
+
+        <div class="proj-tags">
+          <span class="tag green">Python</span>
+          <span class="tag green">Flask</span>
+          <span class="tag blue">JavaScript</span>
+          <span class="tag blue">ApexCharts</span>
+          <span class="tag blue">HTML</span>
+          <span class="tag blue">Bootstrap</span>
+          <span class="tag amber">XAMPP</span>
+          <span class="tag teal">Data Visualization</span>
+          <span class="tag teal">REST API</span>
+        </div>
+        <div class="proj-footer">
+          <a class="proj-link" href="https://github.com/ektad93/HealthMetrics" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            View on GitHub
+          </a>
+          <span class="live-badge">Open Source</span>
+        </div>
+      </div>
+
+      <!-- Airbnb -->
+      <div class="proj-card">
+        <div class="proj-badge teal">Academic Project</div>
+        <h3>Airbnb Application Redesign</h3>
+        <div class="proj-org">University of Texas at Dallas &nbsp;&middot;&nbsp; Jan – May 2022</div>
+        <p>Created a Figma prototype improving the Airbnb application with low, medium, and high-fidelity design iterations. Contributed to the product roadmap, customer journey analysis, and surveys. Delivered a Tableau chart for data-driven design insights.</p>
+        <div class="proj-tags">
+          <span class="tag teal">Figma</span>
+          <span class="tag teal">Tableau</span>
+          <span class="tag purple">Product Roadmap</span>
+          <span class="tag purple">Customer Journey</span>
+          <span class="tag purple">UX Research</span>
+        </div>
+      </div>
+
+      <!-- Maharashtra Polybutene -->
+      <div class="proj-card">
+        <div class="proj-badge teal">Academic Project</div>
+        <h3>Maharashtra Polybutene Ltd Website</h3>
+        <div class="proj-org">University of Mumbai, K.B. College &nbsp;&middot;&nbsp; Jan – May 2013</div>
+        <p>Designed and developed a full company website for Maharashtra Polybutene Ltd to facilitate the sale of products and services, handling end-to-end development from UI design to database integration.</p>
+        <div class="proj-tags">
+          <span class="tag amber">ASP.NET</span>
+          <span class="tag green">C#</span>
+          <span class="tag red">SQL Server</span>
+          <span class="tag blue">Web Design</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Education + Achievements -->
+  <div class="bottom-grid">
+    <div class="card" id="education">
+      <div class="section-label">Education</div>
+      <div class="edu-item">
+        <h3>M.S. Information Technology &amp; Management <span class="gpa-badge">GPA 3.5</span></h3>
+        <div class="deg">University of Texas at Dallas</div>
+        <div class="meta">Dec 2023</div>
+      </div>
+      <div class="edu-item">
+        <h3>Master of Computer Application (MCA) <span class="gpa-badge">GPA 3.7</span></h3>
+        <div class="deg">University of Mumbai, Sterling Institute of Management Studies, India</div>
+        <div class="meta">Jul 2015</div>
+      </div>
+      <div class="edu-item">
+        <h3>B.Sc. Information Technology <span class="gpa-badge">GPA 3.2</span></h3>
+        <div class="deg">University of Mumbai, K.B. College, India</div>
+        <div class="meta">Apr 2013</div>
+      </div>
+    </div>
+
+    <div class="card" id="achievements">
+      <div class="section-label">Achievements</div>
+      <div class="achieve">
+        <div class="medal">★</div>
+        <p><strong>Annual I-Sparkle Award – Best Team Leader</strong><br>Intelenet Global Services, Mumbai &nbsp;&middot;&nbsp; 2017</p>
+      </div>
+      <div class="achieve">
+        <div class="medal">★</div>
+        <p><strong>Microsoft Ambassador</strong><br>University of Texas at Dallas, 2023</p>
+      </div>
+      <div class="achieve">
+        <div class="medal">★</div>
+        <p><strong>SOC Coordinator, AIMDB Club</strong><br>University of Texas at Dallas</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2024 Ekta Abhishek Desai &nbsp;&middot;&nbsp;
+    <a href="https://www.linkedin.com/in/ekta-abhishek-desai-3813a869/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/ektad93" target="_blank" rel="noopener noreferrer">GitHub</a>
+    &nbsp;&middot;&nbsp; Built with GitHub Pages
+  </footer>
+
+</div>
+</body>
+</html>
